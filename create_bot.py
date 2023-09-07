@@ -2,6 +2,7 @@ import sqlalchemy as db
 from aiogram import Dispatcher, Bot
 from aiogram.contrib.fsm_storage.memory import MemoryStorage
 from os import getenv
+from sqlalchemy.ext.declarative import declarative_base
 
 from sqlalchemy.orm import sessionmaker
 
@@ -34,12 +35,15 @@ subscriptions = db.Table('subscriptions', metadata,
                          db.Column('duration', db.Integer),
                          db.Column('price', db.Float))
 
-# insertion_query = subscriptions.insert().values(subsription_name='подписка на 1 месяц',
-#                                                   duration='1 месяц',
-#                                                   price='')
-# connectio.execute(insertion_query)
-# connectio.commit()
-# print(subscribers)
-# print('пользователь добавлен')
+Base = declarative_base()
+
+
+# connectio.execute(subscriptions.insert().values(subsription_name='подписка на 1 месяц',
+#                                                 duration='1',
+#                                                 price='500'))
+# connectio.execute(subscriptions.insert().values(subsription_name='подписка на 2 месяц',
+#                                                 duration='2',
+#                                                 price='1000'))
+connectio.commit()
 
 metadata.create_all(engine)

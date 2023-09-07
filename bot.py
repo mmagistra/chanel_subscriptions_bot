@@ -1,9 +1,7 @@
 import logging
 from aiogram import executor
-from create_bot import dp, bot
-from datetime import datetime, timedelta
-from apscheduler.schedulers.asyncio import AsyncIOScheduler
-from handlers import malling
+from create_bot import dp, bot, connectio
+
 
 from handlers.handlers_users import register_users_handlers
 from handlers.malling import register_malling_handlers
@@ -19,6 +17,7 @@ register_malling_handlers(dp)
 
 
 async def on_shutdown(_):
+    connectio.commit()
     print('bot is offline')
 
 
